@@ -1,5 +1,6 @@
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -8,7 +9,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.Date;
 
 public class Bot extends TelegramLongPollingBot {
-    private final Logger botLogger = LoggerFactory.getLogger(Bot.class);
+    private final Logger botLogger = Logger.getLogger(Bot.class);
     News_8a news8a = new News_8a();
     News_climberNews newsClimberNews = new News_climberNews();
     News_GymClimber newsGymClimber = new News_GymClimber();
@@ -27,7 +28,7 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
 
-        botLogger.debug("New User received. User ID: {}", update.getUpdateId());
+        botLogger.debug("New User received. User ID: {}" + update.getUpdateId());
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(String.valueOf(update.getMessage().getChatId()));
         String chatId = String.valueOf(update.getMessage().getChatId());
@@ -42,7 +43,7 @@ public class Bot extends TelegramLongPollingBot {
         try{
             execute(sendMessage);
         }catch (TelegramApiException e) {
-            botLogger.debug("Exception: {}", e.toString());
+            botLogger.debug("Exception: {}", e);
         }
     }
 

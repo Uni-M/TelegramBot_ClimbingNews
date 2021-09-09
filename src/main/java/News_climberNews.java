@@ -2,8 +2,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
@@ -12,7 +13,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.io.IOException;
 
 public class News_climberNews {
-    private final Logger newsLogger = LoggerFactory.getLogger(News_8a.class);
+    private final Logger newsLogger = Logger.getLogger(News_climberNews.class);
     private Document document;
 
     public News_climberNews() {
@@ -23,7 +24,7 @@ public class News_climberNews {
         try {
             document = Jsoup.connect("https://www.climbernews.com/news/").get();
         } catch (IOException e) {
-            newsLogger.debug("Exception: {}", e.toString());
+            newsLogger.debug("Exception: {}", e);
         }
     }
 
@@ -48,11 +49,11 @@ public class News_climberNews {
             try{
                 new Bot().execute(sm);
             }catch (TelegramApiException e) {
-                newsLogger.debug("Exception: {}", e.toString());
+                newsLogger.debug("Exception: {}", e);
             }
 
         }catch (Exception e) {
-            newsLogger.debug("Exception: {}", e.toString());
+            newsLogger.debug("Exception: {}", e);
         }
     }
 
@@ -69,7 +70,7 @@ public class News_climberNews {
         try {
             new Bot().execute(sendPhoto);
         } catch (TelegramApiException e) {
-            newsLogger.info("Exception: {}", e.toString());
+            newsLogger.info("Exception: {}", e);
         }
     }
 

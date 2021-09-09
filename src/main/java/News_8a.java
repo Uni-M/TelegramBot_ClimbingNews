@@ -1,8 +1,9 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
@@ -11,7 +12,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.io.IOException;
 
 public class News_8a {
-    private final Logger newsLogger = LoggerFactory.getLogger(News_8a.class);
+    private static final Logger newsLogger = Logger.getLogger(News_8a.class);
     private Document document;
 
     public News_8a(){
@@ -22,7 +23,7 @@ public class News_8a {
         try {
             document = Jsoup.connect("https://www.8a.nu").get();
         } catch (IOException e) {
-            newsLogger.debug("Exception: {}", e.toString());
+            newsLogger.debug("Exception: {}", e);
         }
     }
 
@@ -44,11 +45,11 @@ public class News_8a {
             try{
                 new Bot().execute(sm);
             } catch (TelegramApiException e) {
-                newsLogger.debug("Exception: {}", e.toString());
+                newsLogger.debug("Exception: {}", e);
             }
 
         } catch (Exception e) {
-            newsLogger.debug("Exception: {}", e.toString());
+            newsLogger.debug("Exception: {}", e);
         }
     }
 
@@ -66,7 +67,7 @@ public class News_8a {
         try {
             new Bot().execute(sendPhoto);
         } catch (TelegramApiException e) {
-            newsLogger.info("Exception: {}", e.toString()); //debug
+            newsLogger.info("Exception: {}", e); //debug
         }
     }
 }
